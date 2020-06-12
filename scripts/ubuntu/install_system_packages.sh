@@ -14,6 +14,7 @@ PKGS_APPS='
     fish
     git
     htop
+    jq
     nmap
     ntp
     ntpdate
@@ -22,10 +23,10 @@ PKGS_APPS='
     silversearcher-ag
     ssh
     tig
+    tmux
     toilet
     traceroute
     tree
-    tmux
     wget
     xclip
     xsel
@@ -47,12 +48,12 @@ PKGS_SERVER='
 PKGS_ADMIN='
     logwatch
 '
-# ruby-dev
-# npm
 PKGS_DEV='
     python3-dev
     python3-pip
     python3-venv
+    npm
+    ruby-dev
 '
 PKGS_LIBS='
     build-essential

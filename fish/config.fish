@@ -5,7 +5,7 @@
 fundle plugin 'fishpkg/fish-git-util'
 fundle init
 source ~/.config/fish/style.fish
-# vf install compat_aliases
+vf install compat_aliases
 
 
 ##########################
@@ -480,7 +480,11 @@ end
 # New virtual environment, with paths and packages (optionally with name, otherwise use dirname)
 function mkv -a env_name
     mkvirtualenv -p python3 -a . (default-pwd-base $env_name)
+    set -e PYTHONPATH
     add2virtualenv .
+    py-cleanup
+    pip install -U pip setuptools wheel
+    pip install -Ue '.[all]'
     pipr
 end
 
@@ -563,10 +567,12 @@ function wo -a env_name
     if test -n $env_name
         workon $env_name
         set -x _VIRT_ENV_PREV_PWD $PWD
+        set -e PYTHONPATH
         cd $WORKSPACE/$env_name
     else
         deactivate
         cd $_VIRT_ENV_PREV_PWD
+        source $FISH_CONF
     end
 end
 complete -c wo --wraps=workon
